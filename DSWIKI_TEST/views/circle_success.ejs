@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+   
+    </style>
+    <link href="/stylesheets/search_success_style.css" rel="stylesheet" type="text/css">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#overview_form').hide()
+            $('#activity_form').hide()
+            $('#repute_form').hide()
+            $('#tip_form').hide()
+
+           $('#overview_edtbtn').on('click',function(){
+               $('#overview_form').show()
+               $('#overview_edtbtn').hide()
+           })
+           $('#activity_edtbtn').on('click',function(){
+               $('#activity_form').show()
+               $('#activity_edtbtn').hide()
+           })
+           $('#repute_edtbtn').on('click',function(){
+               $('#repute_form').show()
+               $('#repute_edtbtn').hide()
+           })
+           $('#tip_edtbtn').on('click',function(){
+               $('#tip_form').show()
+               $('#tip_edtbtn').hide()
+           })
+
+           
+           $('#overview_sub').on('click',function(){
+               $('#overview_edtbtn').show()
+               $('#overview_form').hide()
+           })
+           $('#activity_sub').on('click',function(){
+               $('#activity_edtbtn').show()
+               $('#activity_form').hide()
+           })
+           $('#repute_sub').on('click',function(){
+               $('#repute_edtbtn').show()
+               $('#repute_form').hide()
+           })
+           $('#tip_sub').on('click',function(){
+               $('#tip_edtbtn').show()
+               $('#tip_form').hide()
+           })
+           var dog = 2;
+            setInterval(function(){
+                if(dog>=3){
+                    dog=1;
+                }
+                $('#dog').attr("src","images/dog"+dog+".jpg");
+                dog++;
+            },1000);
+            var cat = 2;
+            setInterval(function(){
+                if(cat>=3){
+                    cat=1;
+                }
+                $('#cat').attr("src","images/cat"+cat+".jpg");
+                cat++;
+            },1000);
+        })
+    </script>
+    
+</head>
+<body>
+ <nav class="topMenu" >
+        <ul class = 'navbar'>
+                <li>
+                    <a class="logo" href="/">
+                        <img src="/images/logo.png" class='dsu' width = "120" height="60" align="center" />
+                    </a>
+                </li>
+        </ul>
+        <div class="input-form">
+                <form action ='/result' method="POST">
+                        <input type="search" name="text" placeholder="검색하시오" class = 'search'/>
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                </form>
+        </div>                              
+    </nav>
+
+    <div class = "side-left">
+    <div class = "side-left-box1">
+        <a href="http://www.google.com">
+            <img src= "images/dog1.jpg" width="200" height="300" id="dog"  />
+        </a>
+    </div>
+    <div class = "side-left-box2">
+        <a href="http://www.google.com">
+            <img src= "images/cat1.jpg" width="200" height="300" id="cat"  />
+        </a>
+    </div>
+    </div>
+
+    <div class ="mid-center">
+    <div><h2>검색어: <%= text %> </h2></div>
+    <hr/>
+    
+    <h3>개요</h3>
+    <hr align="left" width="30%">
+    
+    <div class="b" name="overview_circle" style="width:700px; height: 200px; border-color: black; border:1px solid gray; "><%= overview_circle %></div>
+   
+    <form action="/circle_edit" method="POST" id="overview_form" name="overview_form">
+        <input type="text" name="overview_in" value = "<%= overview_circle %>" id="overview_in" style="width:500px; height: 150px; border-color: black; border:1px solid gray; margin-top: 20px; ">
+        <input type="hidden" name="key" value="1">
+        <input type="hidden" name="text" value="<%= text%>">
+        <input type="submit" value="완료" id="overview_sub">
+    </form>
+    <button class="btn" id=overview_edtbtn>편집</button> 
+    <br>
+
+
+    <h3>활동내역</h3>
+    <hr align="left" width="30%">
+    <div class="b" style="width:700px; height: 200px; border-color: black; border:1px solid gray; "><%= activity %></div>
+    <form action="/circle_edit" method="POST" id="activity_form" name="activity_form">
+        <input type="text" name="activity_in" value="<%= activity %>" id="activity_in" style="width:500px; height: 150px; border-color: black; border:1px solid gray; margin-top: 20px; ">
+        <input type="hidden" name="key" value="2">
+        <input type="hidden" name="text" value="<%= text%>">
+        <input type="submit" value="완료" id="activity_sub">
+    </form>
+    <button class="btn" id=activity_edtbtn>편집</button>
+    <br>
+
+    <h3>평판</h3>
+    <hr align="left" width="30%">
+    <div class="b" style="width:700px; height: 200px; border-color: black; border:1px solid gray; "><%= repute %></div>
+    <form action="/circle_edit" method="POST" id="repute_form" name="repute_form">
+        <input type="text" name="repute_in" value="<%= repute %>" id="repute_in" style="width:500px; height: 150px; border-color: black; border:1px solid gray; margin-top: 20px; ">
+        <input type="hidden" name="key" value="3">
+        <input type="hidden" name="text" value="<%= text%>">
+        <input type="submit" value="완료" id="repute_sub">
+    </form>
+    <button class="btn" id=repute_edtbtn>편집</button>
+    <br>
+
+    <h3>참고사항</h3>
+    <hr align="left" width="30%">
+    
+    <div class="b" style="width:700px; height: 200px; border-color: black; border:1px solid gray; "><%= tip %></div>
+    
+    <form action="/circle_edit" method="POST" id="tip_form" name="tip_form">
+        <input type="text" name="tip_in" value="<%= tip %>" id="tip_in" style="width:500px; height: 150px; border-color: black; border:1px solid gray; margin-top: 20px; ">
+        <input type="hidden" name="text" value="<%= text %>">   
+        <input type="hidden" name="key" value="4">
+        <input type="submit" value="완료" id="tip_sub">
+    </form>
+    <button class="btn" id=tip_edtbtn>편집</button>
+    <br>
+  </div>
+  <div class = "side-right">
+    <div class = "side-right-box1">
+        <a href = '/damburak'>
+            <img src = "images/sound.jpg" width="200" height="200" id="sound"  />
+        </a>
+    </div>
+        
+</body>
+</html>

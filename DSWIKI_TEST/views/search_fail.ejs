@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DSU WIKI</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/stylesheets/search_fail_style.css" rel="stylesheet" type="text/css">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var dog = 2;
+            setInterval(function(){
+                if(dog>=3){
+                    dog=1;
+                }
+                $('#dog').attr("src","images/dog"+dog+".jpg");
+                dog++;
+            },1000);
+            var cat = 2;
+            setInterval(function(){
+                if(cat>=3){
+                    cat=1;
+                }
+                $('#cat').attr("src","images/cat"+cat+".jpg");
+                cat++;
+            },1000);
+        })
+    </script>
+<header>
+    <nav class="topMenu" >
+        <ul class = 'navbar'>
+                <li>
+                    <a class="logo" href="/">
+                        <img src="images/logo.png" class='dsu' width = "120" height="60" align="center" />
+                    </a>
+                </li>
+        </ul>
+        <div class="input-form">
+                <form action ='/result' method="POST">
+                        <input type="search" name="text" placeholder="검색하시오"/>
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                </form>
+        </div>                              
+    </nav>
+</header>
+</head>
+<body>
+<div><h2 style="text-align: center">"<%= text %>" 검색 결과</h2></div>
+<hr/>
+<div class = "side-left">
+    <div class = "side-left-box1">
+        <a href="http://www.google.com">
+            <img src= "images/dog1.jpg" width="200" height="300" id="dog"  />
+        </a>
+    </div>
+    <div class = "side-left-box2">
+        <a href="http://www.google.com">
+            <img src= "images/cat1.jpg" width="200" height="300" id="cat"  />
+        </a>
+    </div>
+</div>
+<div class = "mid-center">
+<p>검색 결과를 찾을 수 없습니다.</p>
+<a class = 'add-text' href='#' onclick="document.getElementById('go_to_insert').submit();" >[새 문서 만들기]</a>
+<form action="/insert" method="POST" id ='go_to_insert'><input type ='hidden' value= '<%= text %>' name='text' id="text"></form>
+</div>
+<div class = "side-right">
+    <div class = "side-right-box1">
+        <a href = '/damburak'>
+            <img src = "images/sound.jpg" width="200" height="200" id="sound"  />
+        </a>
+    </div>
+</div>
+</body>
+</html>
+
+
+

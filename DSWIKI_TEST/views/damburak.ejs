@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>damburak</title>
+	 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <script>
+    	$(document).ready(function(){
+    	          $('.write').submit(function(){
+    	          	var time = new Date()
+                $.ajax({url : '/message',
+                    type : 'POST',
+                    datatype : 'text',
+                    data : {
+                        name : $('#name').val(),
+                        content : $('#content').val(),
+                        time : time 
+
+                    },
+                    success : function(data){
+                    }
+                })
+                event.preventDefault();
+            })
+            setInterval(function(){ 
+            $.getJSON('/messages', 
+                    function(data){  
+                        $('.side-right-box2').empty();
+                        $.each(data, function(index,value){
+                            var output = ''
+                            output += value.day+" "+value.hours+":"+value.minutes+":"+value.seconds+'<h2>'+ value.name + ':</h2>'+ '<p>' + value.content + '</p>';
+                            $('<div></div>').html(output).prependTo('.side-right-box2');
+                        });
+                    });
+               }, 1000);
+        })
+    </script>
+</head>
+<body>
+<div class = "side-right">
+    <div class = "side-right-box1">
+        <form class = "write">
+            <table>
+                <tr>
+                    <td>닉네임 :</td>
+                    <td><input type="text" id="name" style="border: solid 1px; width: 160px; height: 40px;" /></td>
+                </tr>
+                <tr>
+                    <td>메세지 :</td>
+                    <td><textarea  id="content" style="width: 160px; height: 40px;"></textarea></td>
+                </tr>
+            </table>
+            <input type="submit" value="보내기" style="width: 100px; background-color: #5882FA;" />
+        </form>
+    </div>
+    <div class = "side-right-box2" >
+    </div>
+</div>
+</body>
+</html>

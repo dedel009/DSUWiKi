@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+   
+    </style>
+    <link href="/stylesheets/search_success_style.css" rel="stylesheet" type="text/css">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#study_form').hide()
+            $('#tip_form').hide()
+           
+           
+           $('#study_edtbtn').on('click',function(){
+               $('#study_form').show()
+               $('#study_edtbtn').hide()
+           })
+           $('#tip_edtbtn').on('click',function(){
+               $('#tip_form').show()
+               $('#tip_edtbtn').hide()
+           })
+           
+
+           
+           $('#study_sub').on('click',function(){
+               $('#study_edtbtn').show()
+               $('#study_form').hide()
+           })
+           $('#tip_sub').on('click',function(){
+               $('#tip_edtbtn').show()
+               $('#tip_form').hide()
+           })
+           var dog = 2;
+            setInterval(function(){
+                if(dog>=3){
+                    dog=1;
+                }
+                $('#dog').attr("src","images/dog"+dog+".jpg");
+                dog++;
+            },1000);
+            var cat = 2;
+            setInterval(function(){
+                if(cat>=3){
+                    cat=1;
+                }
+                $('#cat').attr("src","images/cat"+cat+".jpg");
+                cat++;
+            },1000);
+        })
+    </script>
+    
+</head>
+<body>
+ <nav class="topMenu" >
+        <ul class = 'navbar'>
+                <li>
+                    <a class="logo" href="/">
+                        <img src="/images/logo.png" class='dsu' width = "120" height="60" align="center" />
+                    </a>
+                </li>
+        </ul>
+        <div class="input-form">
+                <form action ='/result' method="POST">
+                        <input type="search" name="text" placeholder="검색하시오" class = 'search'/>
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                </form>
+        </div>                              
+    </nav>
+    <div class = "side-left">
+    <div class = "side-left-box1">
+        <a href="http://www.google.com">
+            <img src= "images/dog1.jpg" width="200" height="300" id="dog"  />
+        </a>
+    </div>
+    <div class = "side-left-box2">
+        <a href="http://www.google.com">
+            <img src= "images/cat1.jpg" width="200" height="300" id="cat"  />
+        </a>
+    </div>
+    </div>
+
+    <div class ="mid-center">
+    <div><h2>검색어: <%= text %> </h2></div>
+    <hr/>
+    
+    
+    <h3>설명</h3>
+    <hr align="left" width="30%" >
+    
+    <div class="a" name="explain" style="width:700px; height: 200px; border-color: black; border:1px solid gray; "><%= explain %></div>
+   
+    <form action="/study_edit" method="POST" id="study_form" name="study_form">
+        <input type="text" name="study_in" value = "<%= explain %>" id="study_in" style="width:500px; height: 150px; border-color: black; border:1px solid gray; margin-top: 20px; ">
+        <input type="hidden" name="key" value="1">
+        <input type="hidden" name="text" value="<%= text%>">
+        <input type="submit" value="완료" id="study_sub">
+    </form>
+    <button class="btn" id=study_edtbtn>편집</button> 
+    <br>
+
+
+    <h3>참고사항</h3>
+    <hr align="left" width="30%">
+    <div class="b" style="width:700px; height: 200px; border-color: black; border:1px solid gray; "><%= tip %></div>
+    <form action="/study_edit" method="POST" id="tip_form" name="tip_form" >
+        <input type="text" name="tip_in" value="<%= tip %>" id="tip_in" style="width:500px; height: 150px; border-color: black; border:1px solid gray; margin-top: 20px; ">
+        <input type="hidden" name="key" value="2">
+        <input type="hidden" name="text" value="<%= text%>">
+        <input type="submit" value="완료" id="tip_sub">
+    </form>
+    <button class="btn" id=tip_edtbtn>편집</button>
+    <br>
+    </div>
+    <div class = "side-right">
+    <div class = "side-right-box1">
+        <a href = '/damburak'>
+            <img src = "images/sound.jpg" width="200" height="200" id="sound"  />
+        </a>
+    </div>
+        
+</body>
+</html>

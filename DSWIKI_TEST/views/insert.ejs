@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    .btn{
+            
+            margin-top: 30px;
+            margin-left: 70px;
+            margin-bottom: 20px;
+            border-radius: 1em;
+            background-color: #4641D9;
+            text-align: center;
+            color: white;
+            width: 100px;
+            height: 40px;
+            font-size: 1em;
+            font-weight: bold;
+            padding-bottom: 1pt;
+            padding-top: 1pt;
+            
+}
+</style>
+
+	<title>DSU WIKI</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            var dog = 2;
+            setInterval(function(){
+                if(dog>=3){
+                    dog=1;
+                }
+                $('#dog').attr("src","images/dog"+dog+".jpg");
+                dog++;
+            },1000);
+            var cat = 2;
+            setInterval(function(){
+                if(cat>=3){
+                    cat=1;
+                }
+                $('#cat').attr("src","images/cat"+cat+".jpg");
+                cat++;
+            },1000);
+        })
+    </script>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/stylesheets/insert_style.css" rel="stylesheet" type="text/css">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <nav class="topMenu" >
+        <ul class = 'navbar'>
+                <li>
+                    <a class="logo" href="/">
+                        <img src="/images/logo.png" class='dsu' width = "120" height="60" align="center" />
+                    </a>
+                </li>
+        </ul>
+        <div class="input-form">
+                <form action ='/result' method="POST">
+                        <input type="search" name="text" placeholder="검색하시오" class = 'search'/>
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                </form>
+        </div>                              
+    </nav>
+</head>
+
+<body>
+    <div class="select" style="text-align: center;">
+        <select name="select" id="select">
+            <option value="human" >사람</option>
+            <option value="study">강의</option>
+            <option value="play">편의시설</option>
+            <option value="restaurant">식당</option>
+            <option value="circle">동아리</option>
+        </select>
+        <button class="btn" id="select_btn">선택</button>
+    </div>
+    <hr/>
+<div class = "side-left">
+    <div class = "side-left-box1">
+        <a href="http://www.google.com">
+            <img src= "images/dog1.jpg" width="200" height="300" id="dog"  />
+        </a>
+    </div>
+    <div class = "side-left-box2">
+        <a href="http://www.google.com">
+            <img src= "images/cat1.jpg" width="200" height="300" id="cat"  />
+        </a>
+    </div>
+</div>    
+<div class = "mid-center">
+<form action="/human_insert_to_success" method="POST" id="h_form">    
+    <div class = 'text-human'>
+        <p><h3>소개</h3></p>
+        <input type = 'text' name='introduce' id = 'text-human1' style="width:700px; height: 200px;" />
+        <p><h3>특징</h3></p>
+        <input type = 'text' name='character' id = 'text-human2' style="width:700px; height: 200px;"/>
+        <p><h3><%= text %>에 대한 말.말.말</h3></p>
+        <input type = 'text' name='ssul' id = 'text-human3' style="width:700px; height: 200px;"/>
+        
+    </div>
+    <div style="margin-top: 20px; margin-bottom: 20px;">
+    <input type="submit" id="human_submit" value='업로드' style="">
+    <input type='hidden' value="<%=text%>" name='text'>
+    </div>
+</form>
+
+<form action="/study_insert_to_success" method="POST" id="s_form">   
+    <div class = 'text-study'>
+        <p><h3>설명</h3></p>
+        <input type = 'text' name='explain_study' id = 'text-study1' style="width:700px; height: 200px;" />
+        <p><h3>참고사항</h3></p>
+        <input type = 'text' name='tip_study' id = 'text-study2'style="width:700px; height: 200px;"  />   
+    </div>
+    <div style="margin-top: 20px; margin-bottom: 20px;">
+    <input type="submit" id="study_submit" value='업로드'>
+    <input type='hidden' value="<%=text%>" name='text'>
+    </div>
+</form>
+<form action="/play_insert_to_success" method="POST" id="p_form">   
+    <div class = 'text-play'>
+        <p><h3>종류</h3></p>
+        <input type = 'text' name='sort' id = 'text-play1'style="width:700px; height: 200px;" />
+        <p><h3>설명</h3></p>
+        <input type = 'text' name='explain_play' id = 'text-play2'style="width:700px; height: 200px;" />
+        <p><h3>참고사항</h3></p>
+        <input type = 'text' name='tip_play' id = 'text-play3' style="width:700px; height: 200px;" />
+    </div>
+    <div style="margin-top: 20px; margin-bottom: 20px;">
+    <input type="submit" id="play_submit" value='업로드'>
+    <input type='hidden' value="<%=text%>" name='text'>
+    </div>
+</form>
+<form action="/restaurant_insert_to_success" method="POST" id="r_form">   
+    <div class = 'text-restaurant'>
+        <p><h3>개요</h3></p>
+        <input type = 'text' name='overview_restaurant' id = 'text-restaurant1'style="width:700px; height: 200px;"  />
+        <p><h3>메뉴</h3></p>
+        <input type = 'text' name='menu' id = 'text-restaurant2'style="width:700px; height: 200px;"  />
+        <p><h3>참고사항</h3></p>
+        <input type = 'text' name='tip_restaurant' id = 'text-restaurant3' style="width:700px; height: 200px;" />
+    </div>
+    <div style="margin-top: 20px; margin-bottom: 20px;">
+    <input type="submit" id="restaurant_submit" value='업로드'>
+    <input type='hidden' value="<%=text%>" name='text'>
+    </div>
+</form>
+<form action="/circle_insert_to_success" method="POST" id="c_form">   
+    <div class = 'text-circle'>
+        <p><h3>개요</h3></p>
+        <input type = 'text' name='overview_circle' id = 'text-circle1'style="width:700px; height: 200px;"  />
+        <p><h3>활동내역</h3></p>
+        <input type = 'text' name='activity' id = 'text-circle2'style="width:700px; height: 200px;" />
+        <p><h3>평판</h3></p>
+        <input type = 'text' name='repute' id = 'text-circle3'style="width:700px; height: 200px;"  />
+        <p><h3>참고사항</h3></p>
+        <input type = 'text' name='tip_circle' id = 'text-circle4' style="width:700px; height: 200px;" />
+    </div>
+    <div style="margin-top: 20px; margin-bottom: 20px;">
+    <input type="submit" id="circle_submit" value='업로드'>
+    <input type='hidden' value="<%=text%>" name='text'>
+    </div>
+</form>
+</div>
+<div class = "side-right">
+    <div class = "side-right-box1">
+        <a href = '/damburak'>
+            <img src = "images/sound.jpg" width="200" height="200" id="sound"  />
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function(){
+        $('#h_form').hide();
+        $('#s_form').hide();
+        $('#p_form').hide();
+        $('#r_form').hide();
+        $('#c_form').hide();
+        $('#select_btn').on('click',function(){
+            if($('#select option:selected').val()=='human'){
+                    $('#h_form').show();
+                    $('#s_form').hide();
+                    $('#p_form').hide();
+                    $('#r_form').hide();
+                    $('#c_form').hide();
+            }
+            else if($('#select option:selected').val()=='study'){
+                    $('#h_form').hide();
+                    $('#s_form').show();
+                    $('#p_form').hide();
+                    $('#r_form').hide();
+                    $('#c_form').hide();
+            }
+            else if($('#select option:selected').val()=='play'){
+                    $('#h_form').hide();
+                    $('#s_form').hide();
+                    $('#p_form').show();
+                    $('#r_form').hide();
+                    $('#c_form').hide();
+            }
+            else if($('#select option:selected').val()=='restaurant'){
+                    $('#h_form').hide();
+                    $('#s_form').hide();
+                    $('#p_form').hide();
+                    $('#r_form').show();
+                    $('#c_form').hide();
+            }
+            else if($('#select option:selected').val()=='circle'){
+                    $('#h_form').hide();
+                    $('#s_form').hide();
+                    $('#p_form').hide();
+                    $('#r_form').hide();
+                    $('#c_form').show();
+            }
+
+        })
+
+  
+    
+    })
+</script>
+</html>
+
+
+
